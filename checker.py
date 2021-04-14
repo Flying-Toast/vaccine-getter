@@ -4,6 +4,12 @@ import json
 import time
 from string import capwords
 import os
+from smtplib import SMTP_SSL
+
+RECIPIENTS = ["vaccine@theschwartz.xyz"]
+
+EMAIL_ADDRESS = "vaccine-notifier@theschwartz.xyz"
+EMAIL_PASSWORD = "BadPassword!"
 
 def fetch_openings():
     headers = {
@@ -23,22 +29,30 @@ def fetch_openings():
             ret.append(i["city"])
     return (ret, timestamp)
 
-def beep():
-    os.system("cvlc --play-and-exit /usr/share/sounds/freedesktop/stereo/complete.oga")
+def notify(conn, timestamp, openings):
+    if len(openings) == 0:
+        print(f"No openings (updated at {timestamp})")
+        return
+    print(f"Vaccines availible (updated at {timestamp}):")
+    for city in openings:
+        print(f"\t{city}")
+    msg = f"Subject: MA Vaccine Openings\n\nUpdated at {timestamp}. Openings:"
+    for city in openings:
+        msg += f"\n    - {city}, Massachusetts"
+    msg += "\n--------\nSchedule an appointment here: https://www.cvs.com/immunizations/covid-19-vaccine"
+    for i in RECIPIENTS:
+        conn.sendmail(EMAIL_ADDRESS, i, msg)
 
 def main():
+    smtp_conn = SMTP_SSL("mail.gandi.net", 465)
+    smtp_conn.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
     last_timestamp = ""
     while True:
         (openings, timestamp) = fetch_openings()
+        notify(smtp_conn, timestamp, openings)
         if last_timestamp == timestamp:
             continue
-        print(f"Updated at {timestamp}. Openings:")
-        if len(openings) == 0:
-            print("\tNo openings")
-        else:
-            beep()
-            for i in openings:
-                print(f"\t{i.city}")
+        notify(smtp_conn, timestamp, openings)
         last_timestamp = timestamp
         time.sleep(15)
 
