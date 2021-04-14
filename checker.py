@@ -3,6 +3,7 @@ from http.client import HTTPSConnection
 import json
 import time
 from string import capwords
+import os
 
 def fetch_openings():
     headers = {
@@ -22,6 +23,9 @@ def fetch_openings():
             ret.append(i["city"])
     return (ret, timestamp)
 
+def beep():
+    os.system("cvlc --play-and-exit /usr/share/sounds/freedesktop/stereo/complete.oga")
+
 def main():
     last_timestamp = ""
     while True:
@@ -32,6 +36,7 @@ def main():
         if len(openings) == 0:
             print("\tNo openings")
         else:
+            beep()
             for i in openings:
                 print(f"\t{i.city}")
         last_timestamp = timestamp
