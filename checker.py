@@ -31,7 +31,6 @@ def fetch_openings():
 
 def notify(conn, timestamp, openings):
     if len(openings) == 0:
-        print(f"No openings (updated at {timestamp})")
         return
     print(f"Vaccines availible (updated at {timestamp}):")
     for city in openings:
