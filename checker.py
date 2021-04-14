@@ -48,7 +48,6 @@ def main():
     last_timestamp = ""
     while True:
         (openings, timestamp) = fetch_openings()
-        notify(smtp_conn, timestamp, openings)
         if last_timestamp == timestamp:
             continue
         notify(smtp_conn, timestamp, openings)
