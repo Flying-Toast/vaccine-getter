@@ -40,7 +40,7 @@ def main():
             for i in openings:
                 print(f"\t{i.city}")
         last_timestamp = timestamp
-        time.sleep(1)
+        time.sleep(15)
 
 if __name__ == "__main__":
     main()
