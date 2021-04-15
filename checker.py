@@ -22,6 +22,7 @@ def fetch_openings():
     conn = HTTPSConnection("www.cvs.com")
     conn.request("GET", "/immunizations/covid-19-vaccine.vaccine-status.ma.json?vaccineinfo", headers=headers)
     res = conn.getresponse().read()
+    conn.close()
     j = json.loads(res.decode("utf-8"))["responsePayloadData"]
     ret = []
     timestamp = j["currentTime"]
