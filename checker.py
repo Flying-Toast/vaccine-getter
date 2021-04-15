@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 from http.client import HTTPSConnection
 import json
 import time
