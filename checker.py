@@ -35,9 +35,6 @@ def fetch_openings():
 def notify(conn, timestamp, openings):
     if len(openings) == 0:
         return
-    print("Vaccines availible (updated at %s):" % timestamp)
-    for city in openings:
-        print("\t%s" % city)
     msg = "Subject: MA Vaccine Openings\n\nUpdated at %s. Openings:" % timestamp
     for city in openings:
         msg += "\n    - %s, Massachusetts" % city
