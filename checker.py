@@ -46,12 +46,15 @@ def main():
     smtp_conn = SMTP_SSL("mail.gandi.net", 465)
     smtp_conn.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
     last_timestamp = ""
+    prev_openings = []
     while True:
         (openings, timestamp) = fetch_openings()
         if last_timestamp == timestamp:
             continue
-        notify(smtp_conn, timestamp, openings)
+        new_openings = list(filter(lambda x: not(x in prev_openings), openings))
+        notify(smtp_conn, timestamp, new_openings)
         last_timestamp = timestamp
+        prev_openings = openings
         time.sleep(15)
 
 if __name__ == "__main__":
