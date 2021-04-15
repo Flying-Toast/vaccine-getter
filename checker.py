@@ -23,7 +23,7 @@ def fetch_openings():
     timestamp = j["currentTime"].split("T")[1].split(":")[:-1]
     [hour, minute] = map(int, timestamp)
     hour -= 9
-    timestamp = f"{hour}:{str(minute).zfill(2)}"
+    timestamp = "%s:%s" % (hour, str(minute).zfill(2))
     for i in j["data"]["MA"]:
         if i["status"] != "Fully Booked":
             ret.append(capwords(i["city"]))
@@ -32,12 +32,12 @@ def fetch_openings():
 def notify(conn, timestamp, openings):
     if len(openings) == 0:
         return
-    print(f"Vaccines availible (updated at {timestamp}):")
+    print("Vaccines availible (updated at %s):" % timestamp)
     for city in openings:
-        print(f"\t{city}")
-    msg = f"Subject: MA Vaccine Openings\n\nUpdated at {timestamp}. Openings:"
+        print("\t%s" % city)
+    msg = "Subject: MA Vaccine Openings\n\nUpdated at %s. Openings:" % timestamp
     for city in openings:
-        msg += f"\n    - {city}, Massachusetts"
+        msg += "\n    - %s, Massachusetts" % city
     msg += "\n--------\nSchedule an appointment here: https://www.cvs.com/immunizations/covid-19-vaccine"
     for i in RECIPIENTS:
         conn.sendmail(EMAIL_ADDRESS, i, msg)
