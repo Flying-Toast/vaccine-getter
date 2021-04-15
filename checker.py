@@ -11,6 +11,7 @@ RECIPIENTS = [
     #"akhilmibrahim@gmail.com",
 ]
 
+SLEEP_SECONDS = 15
 EMAIL_ADDRESS = "vaccine-notifier@theschwartz.xyz"
 EMAIL_PASSWORD = "BadPassword!"
 
@@ -46,11 +47,11 @@ def main():
     while True:
         (openings, timestamp) = fetch_openings()
         if last_timestamp == timestamp:
-            time.sleep(15)
+            time.sleep(SLEEP_SECONDS)
             continue
         notify(smtp_conn, timestamp, openings)
         last_timestamp = timestamp
-        time.sleep(15)
+        time.sleep(SLEEP_SECONDS)
 
 if __name__ == "__main__":
     main()
