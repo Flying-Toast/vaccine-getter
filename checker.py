@@ -26,7 +26,7 @@ def fetch_openings():
     timestamp = f"{hour}:{str(minute).zfill(2)}"
     for i in j["data"]["MA"]:
         if i["status"] != "Fully Booked":
-            ret.append(i["city"])
+            ret.append(capwords(i["city"]))
     return (ret, timestamp)
 
 def notify(conn, timestamp, openings):
