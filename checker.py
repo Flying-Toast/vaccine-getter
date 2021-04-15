@@ -8,7 +8,7 @@ from smtplib import SMTP_SSL
 
 RECIPIENTS = [
     "vaccine@theschwartz.xyz",
-    "akhilmibrahim@gmail.com",
+    #"akhilmibrahim@gmail.com",
 ]
 
 EMAIL_ADDRESS = "vaccine-notifier@theschwartz.xyz"
@@ -23,12 +23,7 @@ def fetch_openings():
     res = conn.getresponse().read()
     j = json.loads(res.decode("utf-8"))["responsePayloadData"]
     ret = []
-    timestamp = j["currentTime"].split("T")[1].split(":")[:-1]
-    [hour, minute] = map(int, timestamp)
-    hour -= 9
-    if hour < 0:
-        hour += 24
-    timestamp = "%s:%s" % (hour, str(minute).zfill(2))
+    timestamp = j["currentTime"]
     for i in j["data"]["MA"]:
         if i["status"] != "Fully Booked":
             ret.append(capwords(i["city"]))
