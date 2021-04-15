@@ -45,6 +45,8 @@ def notify(conn, timestamp, openings):
 def main():
     smtp_conn = SMTP_SSL("mail.gandi.net", 465)
     smtp_conn.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+    for i in RECIPIENTS:
+        smtp_conn.sendmail(EMAIL_ADDRESS, i, "Subject: Vaccine Notifier Started\n\nmonitor process started")
     last_timestamp = ""
     while True:
         (openings, timestamp) = fetch_openings()
