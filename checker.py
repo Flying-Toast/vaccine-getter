@@ -9,6 +9,7 @@ from smtplib import SMTP_SSL
 RECIPIENTS = [
     "vaccine@theschwartz.xyz",
     "jorsch@gmail.com",
+    "davidflodman1@verizon.net",
     #"akhilmibrahim@gmail.com",
 ]
 
