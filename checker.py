@@ -3,7 +3,6 @@ from http.client import HTTPSConnection
 import json
 import time
 from string import capwords
-import os
 from smtplib import SMTP_SSL
 
 RECIPIENTS = [
