@@ -37,7 +37,7 @@ def notify(conn, timestamp, openings):
     msg = "Subject: MA Vaccine Openings\n\nUpdated at %s. Openings:" % timestamp
     for city in openings:
         msg += "\n    - %s, Massachusetts" % city
-    msg += "\n--------\nSchedule an appointment here: https://www.cvs.com/immunizations/covid-19-vaccine"
+    msg += "\n--------\nSchedule an appointment here: https://www.cvs.com/immunizations/covid-19-vaccine (when you get to the page that asks for a zipcode/city, enter one of these^^ cities)"
     for i in RECIPIENTS:
         conn.sendmail(EMAIL_ADDRESS, i, msg)
 
