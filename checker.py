@@ -35,7 +35,8 @@ def fetch_openings():
 def notify(conn, timestamp, openings):
     if len(openings) == 0:
         return
-    msg = "Subject: MA Vaccine Openings\n\nUpdated at %s. Openings:" % timestamp
+    pretty_time = time.strftime("%I:%M %p").lstrip("0")
+    msg = "Subject: MA Vaccine Openings\n\nOpenings as of %s:" % pretty_time
     for city in openings:
         msg += "\n    - %s, Massachusetts" % city
     msg += "\n--------\nSchedule an appointment here: https://www.cvs.com/immunizations/covid-19-vaccine (when you get to the page that asks for a zipcode/city, enter one of these^^ cities)"
