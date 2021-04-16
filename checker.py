@@ -10,6 +10,7 @@ RECIPIENTS = [
     "vaccine@theschwartz.xyz",
     "jorsch@gmail.com",
     "davidflodman1@verizon.net",
+    "gmlaskowsk@gmail.com",
     #"akhilmibrahim@gmail.com",
 ]
 
