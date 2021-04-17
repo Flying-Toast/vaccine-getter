@@ -10,7 +10,7 @@ RECIPIENTS = [
     "jorsch@gmail.com",
     "davidflodman1@verizon.net",
     "gmlaskowsk@gmail.com",
-    "akhilmibrahim@gmail.com",
+    #"akhilmibrahim@gmail.com",
 ]
 
 SLEEP_SECONDS = 15
